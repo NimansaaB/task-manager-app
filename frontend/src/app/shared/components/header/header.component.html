@@ -1,0 +1,71 @@
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <a routerLink="/">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <span>Task Manager</span>
+      </a>
+    </div>
+
+    <nav class="desktop-nav">
+      <ul>
+        <li *ngIf="authService.isAuthenticated()">
+          <a routerLink="/tasks" routerLinkActive="active">Tasks</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="user-actions">
+      <ng-container *ngIf="!authService.isAuthenticated()">
+        <a routerLink="/auth/login" class="login-button">Login</a>
+        <a routerLink="/auth/register" class="register-button">Register</a>
+      </ng-container>
+
+      <div *ngIf="authService.isAuthenticated()" class="user-menu">
+        <button (click)="logout()" class="logout-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+
+    <button class="mobile-menu-button" (click)="toggleMenu()">
+      <svg *ngIf="!isMenuOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+      <svg *ngIf="isMenuOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="mobile-nav" [class.open]="isMenuOpen">
+    <ul>
+      <li *ngIf="authService.isAuthenticated()">
+        <a routerLink="/tasks" routerLinkActive="active" (click)="toggleMenu()">Tasks</a>
+      </li>
+      <li *ngIf="!authService.isAuthenticated()">
+        <a routerLink="/auth/login" (click)="toggleMenu()">Login</a>
+      </li>
+      <li *ngIf="!authService.isAuthenticated()">
+        <a routerLink="/auth/register" (click)="toggleMenu()">Register</a>
+      </li>
+      <li *ngIf="authService.isAuthenticated()">
+        <a (click)="logout(); toggleMenu()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</header>
