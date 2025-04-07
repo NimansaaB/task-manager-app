@@ -1,0 +1,109 @@
+<div class="register-container">
+  <div class="register-card">
+    <div class="brand">
+      <div class="logo-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+          <path d="M2 17l10 5 10-5"></path>
+          <path d="M2 12l10 5 10-5"></path>
+        </svg>
+      </div>
+      <h1>Task Manager</h1>
+    </div>
+
+    <div class="register-header">
+      <h2>Create Account</h2>
+      <p>Please fill in your details to get started</p>
+    </div>
+
+    <div *ngIf="error" class="error-alert">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <span>{{ error }}</span>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <div class="input-wrapper">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            placeholder="Choose a username"
+          >
+        </div>
+        <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="error-message">
+          <span *ngIf="registerForm.get('username')?.errors?.['required']">Username is required</span>
+          <span *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 4 characters</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="Create a password"
+          >
+        </div>
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+          <span *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</span>
+          <span *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="input-wrapper">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <input
+            type="password"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="Confirm your password"
+          >
+        </div>
+        <div *ngIf="registerForm.get('confirmPassword')?.touched && (registerForm.get('confirmPassword')?.invalid || registerForm.errors?.['passwordMismatch'])" class="error-message">
+          <span *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirm password is required</span>
+          <span *ngIf="registerForm.errors?.['passwordMismatch']">Passwords do not match</span>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="registerForm.invalid || isSubmitting"
+        class="create-button"
+      >
+        <span *ngIf="!isSubmitting">Create Account</span>
+        <div *ngIf="isSubmitting" class="loader"></div>
+      </button>
+
+      <div class="login-link">
+        <span>Already have an account?</span>
+        <a routerLink="/auth/login">Sign in</a>
+      </div>
+    </form>
+  </div>
+</div>
