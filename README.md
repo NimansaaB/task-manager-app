@@ -1,3 +1,5 @@
+
+
 # ✅ Task Manager Application
 
 > *Organize. Track. Accomplish.*
@@ -36,7 +38,7 @@ A full-stack Task Manager application built with Angular and Spring Boot. This a
 
 ## 📂 Project Structure
 
-
+```
 task-manager-app/
 ├── frontend/                 # Angular frontend
 │   ├── src/
@@ -48,19 +50,19 @@ task-manager-app/
 │   │   │   ├── shared/       # Shared components, models
 │   │   └── assets/
 └── backend/                  # Spring Boot backend
-├── src/
-│   ├── main/
-│   │   ├── java/com/example/backend/
-│   │   │   ├── config/       # Configuration classes
-│   │   │   ├── controller/   # REST controllers
-│   │   │   ├── dto/          # Data Transfer Objects
-│   │   │   ├── exception/    # Custom exceptions
-│   │   │   ├── model/        # JPA entities
-│   │   │   ├── repository/   # JPA repositories
-│   │   │   ├── security/     # Security configurations
-│   │   │   └── service/      # Business logic
-│   │   └── resources/        # Application properties, SQL scripts
-
+    ├── src/
+    │   ├── main/
+    │   │   ├── java/com/example/backend/
+    │   │   │   ├── config/       # Configuration classes
+    │   │   │   ├── controller/   # REST controllers
+    │   │   │   ├── dto/          # Data Transfer Objects
+    │   │   │   ├── exception/    # Custom exceptions
+    │   │   │   ├── model/        # JPA entities
+    │   │   │   ├── repository/   # JPA repositories
+    │   │   │   ├── security/     # Security configurations
+    │   │   │   └── service/      # Business logic
+    │   │   └── resources/        # Application properties, SQL scripts
+```
 
 ---
 
@@ -74,23 +76,23 @@ task-manager-app/
 ### Backend Setup
 1. Clone the repository
 2. Navigate to the backend directory
-3. Configure the database connection in src/main/resources/application.properties
+3. Configure the database connection in `src/main/resources/application.properties`
 4. Run the Spring Boot application:
-   bash
+   ```bash
    ./mvnw spring-boot:run
-
+   ```
 
 ### Frontend Setup
 1. Navigate to the frontend directory
 2. Install dependencies:
-   bash
+   ```bash
    npm install
-
+   ```
 3. Start the Angular development server:
-   bash
+   ```bash
    npm start
-
-4. Access the application at http://localhost:4200
+   ```
+4. Access the application at `http://localhost:4200`
 
 ---
 
@@ -98,45 +100,42 @@ task-manager-app/
 
 To secure sensitive information like database credentials and JWT secret:
 
-1. Create a .env file in the backend root directory:
-
+1. Create a `.env` file in the backend root directory:
+   ```
    DB_USERNAME=root
    DB_PASSWORD=your_password
    JWT_SECRET=your_secret_key
-
-
-2. Add this dependency to pom.xml:
-   xml
+   ```
+2. Add this dependency to `pom.xml`:
+   ```xml
    <dependency>
-   <groupId>me.paulschwarz</groupId>
-   <artifactId>spring-dotenv</artifactId>
-   <version>3.0.0</version>
+       <groupId>me.paulschwarz</groupId>
+       <artifactId>spring-dotenv</artifactId>
+       <version>3.0.0</version>
    </dependency>
-
-
-3. Update application.properties to use these variables:
-   properties
+   ```
+3. Update `application.properties` to use these variables:
+   ```properties
    spring.datasource.username=${DB_USERNAME}
    spring.datasource.password=${DB_PASSWORD}
    app.jwt.secret=${JWT_SECRET}
-
-
-4. Add .env to your .gitignore file to prevent committing sensitive information
+   ```
+4. Add `.env` to your `.gitignore` file to prevent committing sensitive information
 
 ---
 
 ## 🔌 API Endpoints
 
 ### Authentication
-- POST /api/auth/register - Register a new user
-- POST /api/auth/login - Login and get JWT token
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login and get JWT token
 
 ### Tasks
-- GET /api/tasks - Get all tasks
-- GET /api/tasks/{id} - Get task by ID
-- POST /api/tasks - Create a new task
-- PUT /api/tasks/{id} - Update an existing task
-- DELETE /api/tasks/{id} - Delete a task
+- `GET /api/tasks` - Get all tasks
+- `GET /api/tasks/{id}` - Get task by ID
+- `POST /api/tasks` - Create a new task
+- `PUT /api/tasks/{id}` - Update an existing task
+- `DELETE /api/tasks/{id}` - Delete a task
 
 ---
 
@@ -168,3 +167,6 @@ The application implements JWT-based authentication. After successful login, a t
 - Built as part of the Treinetic Intern Full-Stack Engineer assignment
 - Icons from Heroicons
 - Font from Google Fonts (Inter)
+
+---
+
